@@ -49,4 +49,4 @@ ownerSchema.set('toJSON', {
     }
   })
 
-module.exports =  mongoose.model('owner', ownerSchema)
+module.exports =  mongoose.model('Owner', ownerSchema)

@@ -3,8 +3,10 @@ const {
   getAllOwners,
   getOwnerById,
   createOwner,
-  deleteOwnerById
+  deleteOwnerById,
+  // getAllOwnersSort
 } = require('../../controllers/owner')
+const Owner = require('../../models/Owner')
 
 module.exports = async function (fastify, opts) {
   fastify.get('/', async function (_, reply) {
@@ -47,4 +49,28 @@ module.exports = async function (fastify, opts) {
       return e
     }
   })
+
+  //  ruta de ordenamiento
+  fastify.get('/sort', async function (request, reply) {
+    try {
+
+      const result =  await Owner.find({ isActive: true }).sort({ name: -1 })
+
+      // if(data) {
+      //   return reply.send(data)
+      // }
+      // // console.log(data)
+      //  return err
+      
+      // console.log(owners)
+      // return reply.send(owners)
+      return reply.send(result)
+      
+    } catch (error) {
+      return error
+    }
+  })
 }
+
+
+
