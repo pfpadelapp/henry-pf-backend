@@ -32,6 +32,7 @@ module.exports = async function (fastify, opts) {
   fastify.post('/', async function (request, reply) {
     const { username, name, lastName, contact, email, password } = request.body
     try {
+      
       const newUser = await createUser(
         username,
         name,
@@ -40,7 +41,9 @@ module.exports = async function (fastify, opts) {
         email,
         password
       )
-      return reply.send(newUser)
+       const token = fastify.jwt.sign({ newUser })
+       
+      return reply.send({newUser, token})
     } catch (e) {
       return e
     }
