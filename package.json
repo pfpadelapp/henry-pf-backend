@@ -34,7 +34,8 @@
     "fastify": "^4.0.0",
     "fastify-cli": "^4.4.0",
     "fastify-plugin": "^3.0.0",
-    "mongoose": "^6.5.0"
+    "mongoose": "^6.5.0",
+    "request": "^2.88.2"
   },
   "devDependencies": {
     "@fastify/swagger": "^7.4.1",
