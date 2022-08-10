@@ -21,5 +21,4 @@ module.exports = async function (fastify, opts) {
   fastify.register(fastifyJWT, {
     secret: process.env.JWT_SECRET
   })
-
 }

@@ -99,25 +99,19 @@ async function searhcFieldByName(name) {
   }
 }
 
-async function getPriceByRange(minPrice, maxPrice)
-{
-  try
-  {
-    const result = await PadelField.find(
-      {
-        isActive: true,
-        price:
-        {
-          $gte: minPrice,
-          $lte: maxPrice
-        }
-      });
+async function getPriceByRange(minPrice, maxPrice) {
+  try {
+    const result = await PadelField.find({
+      isActive: true,
+      price: {
+        $gte: minPrice,
+        $lte: maxPrice
+      }
+    })
 
-    return result;
-  }
-  catch(e)
-  {
-    return e;
+    return result
+  } catch (e) {
+    return e
   }
 }
 

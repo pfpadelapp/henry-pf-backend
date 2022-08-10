@@ -1,10 +1,10 @@
 'use strict'
 const {
-  getAllUsers,
+  getAllAdmin,
   getUserById,
   createUser,
   deleteUserById
-} = require('../../controllers/user')
+} = require('../../controllers/admin')
 const { pagination } = require('../../utils/pagination')
 const bcrypt = require('bcrypt')
 require('dotenv')
@@ -14,7 +14,7 @@ module.exports = async function (fastify, opts) {
   fastify.get('/', async function (request, reply) {
     try {
       const { page, limit } = request.query
-      const users = await getAllUsers()
+      const users = await getAllAdmin()
       const result = pagination(users, page, limit)
       return reply.send(result)
     } catch (e) {
@@ -68,47 +68,6 @@ module.exports = async function (fastify, opts) {
           }
         })
       })
-
-      // -------REFERENCE -----//
-      //     const verificacion = express.Router();
-      // verificacion.use((req, res, next) => { // middleware
-      //     let token = req.headers['x-access-token'] || req.headers['authorization']
-      //     if(!token){
-      //         res.status(401).send({
-      //             error: "Token is necessary"
-      //         })
-      //         return
-      //     }
-      //     if (token.startsWith("Bearer ")){
-      //         token = token.slice(7, token.length)
-      //         console.log(token)
-      //     }
-      //     if(token){
-      //         jwt.verify(token, server.get("key"), (error, decoded) => {
-      //             if(error){
-      //                 return res.json({
-      //                     message: "EL TOKEN NO ES VÁLIDO"
-      //                 })
-      //             }else{
-      //                 req.decoded = decoded;
-      //                 next()
-      //             }
-      //         })
-      //     }
-      // })
-      // -------REFERENCE -----//
-
-      // bcrypt.compare(password, foundUser.password, function(err, data, reply) {
-      //   if(err){
-      //     throw err
-      //   } if(data) {
-      //     const  userid  = foundUser.id
-      //    const accessToken = fastify.jwt.sign({ userid })
-      //    return accessToken;
-      //   }
-      //   else {
-      //     return reply.status(401).json({ msg: "Invalid credencial" })
-      //   }});
     } catch (err) {
       reply.send(err, 'este errawr')
     }
