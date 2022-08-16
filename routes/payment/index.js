@@ -27,7 +27,7 @@ router.post('/createPayment', (req, res) => {
         brand_name: 'Padel Field',
         landing_page: 'NO_PREFERENCE',
         user_action: 'PAY_NOW',
-        return_url: `http://localhost:5173/detail/${idField}`,
+        return_url: `http://localhost:5173/resultadoPago`,
         cancel_url: `http://localhost:5173/detail/${idField}`
       }
     }
@@ -61,8 +61,7 @@ router.get('/executePayment', (req, res) => {
         json: true
       },
       (_err, response) => {
-        if (!_err) res.send({ msg: 'Payment has been succesfull' })
-        else res.send({ err: 'Payment has been rejected' })
+        res.json({ msg: response.body })
       }
     )
   } catch (e) {
