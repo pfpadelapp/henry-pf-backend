@@ -13,24 +13,18 @@ async function getReviews() {
   }
 }
 
-// async function registerReviews( fielId, rating, review) {
-//     try {
-//         const search = await PadelField.findById(fielId);
-//        const newReviews = await Reviews.create({
-//             rating,
-//             review,
-//             padelFieldsID: search,
-//             isActive: true,
-//        })
-
-//         return newReviews.save()
-//     }catch(e) {
-//         return e
-//     }
-
-// }
+async function deleteReviewById(reviewId) {
+  try {
+    const review = await Reviews.findByIdAndUpdate(reviewId, {
+      isActive: false
+    })
+    return review
+  } catch (e) {
+    return e
+  }
+}
 
 module.exports = {
-  getReviews
-  // registerReviews
+  getReviews,
+  deleteReviewById
 }
