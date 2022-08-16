@@ -57,9 +57,9 @@ server.use((err, req, res, next) => {
   res.status(status).send(message)
 })
 
-// port
-server.listen(3000, () => {
-  console.log('%s listening at 3000') // eslint-disable-line no-console
+const PORT = process.env.PORT || 3000
+server.listen(PORT, () => {
+  console.log(`%s listening at ${PORT}`) // eslint-disable-line no-console
 })
 
 module.exports = server
