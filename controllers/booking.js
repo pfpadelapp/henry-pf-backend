@@ -1,4 +1,4 @@
-const Booking = require('../models/booking')
+const Booking = require('../models/Booking')
 const { sendMail } = require('../utils/email')
 const { getUserById } = require('./user')
 const { getFieldById } = require('./field')
