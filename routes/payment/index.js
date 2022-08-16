@@ -70,7 +70,7 @@ router.get('/executePayment', (req, res) =>
         },
         (_err, response) =>
         {
-            res.send({msg: response.body.data.status});
+            res.json({msg: response.body});
         })
     }
     catch(e)
