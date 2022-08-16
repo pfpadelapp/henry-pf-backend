@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose')
-const bcrypt = require("bcrypt")
+const bcrypt = require('bcrypt')
 
 const userSchema = new Schema(
   {
@@ -35,7 +35,7 @@ const userSchema = new Schema(
       require: true,
       trim: true
     },
-    role:{
+    role: {
       type: String,
       require: true,
       default: 'user'
@@ -63,8 +63,8 @@ userSchema.set('toJSON', {
   }
 })
 
-userSchema.pre('save', async function(next){
-  const salt = await bcrypt.genSalt();
+userSchema.pre('save', async function (next) {
+  const salt = await bcrypt.genSalt()
   this.password = await bcrypt.hash(this.password, salt)
   next()
 })

@@ -1,6 +1,6 @@
 // const {expressjwt: jwt} = require("express-jwt")
 // const jwks = require('jwks-rsa');
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken')
 require('dotenv')
 
 // const jwtCheck = jwt({
@@ -15,19 +15,21 @@ require('dotenv')
 //   algorithms: ['RS256']
 // })
 
-
 const jwtCheck = (req, res, next) => {
-  const accessToken = req.headers.authorization || req.headers["x-access-token"] || req.query.accestoken; // Bearer token
-  if(!accessToken) res.send("Access denied");
+  const accessToken =
+    req.headers.authorization ||
+    req.headers['x-access-token'] ||
+    req.query.accestoken // Bearer token
+  if (!accessToken) res.send('Access denied')
   // const token = accessToken.headers.authorization.split(" ")[1]
   jwt.verify(accessToken, process.env.JWT_SECRET, (err, decoded) => {
-    if(err){
-      res.send("Access denied or token expired")
-    }else{
+    if (err) {
+      res.send('Access denied or token expired')
+    } else {
       req.userId = decoded.id
       next()
     }
   })
 }
 
-module.exports = jwtCheck;
+module.exports = jwtCheck

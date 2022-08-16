@@ -1,5 +1,5 @@
 const { Schema, model } = require('mongoose')
-const bcrypt = require("bcrypt")
+const bcrypt = require('bcrypt')
 
 const ownerSchema = new Schema(
   {
@@ -25,7 +25,7 @@ const ownerSchema = new Schema(
       require: true,
       trim: true
     },
-    role:{
+    role: {
       type: String,
       default: 'owner'
     },
@@ -50,13 +50,11 @@ ownerSchema.set('toJSON', {
   }
 })
 
-
-ownerSchema.pre('save', async function(next){
-  const salt = await bcrypt.genSalt();
+ownerSchema.pre('save', async function (next) {
+  const salt = await bcrypt.genSalt()
   this.password = await bcrypt.hash(this.password, salt)
   next()
 })
-
 
 const Owner = model('owner', ownerSchema)
 

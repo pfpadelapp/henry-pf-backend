@@ -34,18 +34,18 @@ const padelFieldsSchema = new Schema(
       type: Number,
       require: true
     },
-    ratingsAverage:{
+    ratingsAverage: {
       type: Number
     },
     horario: [],
-    review: [ 
+    review: [
       // {
       //   type: Schema.Types.ObjectId,
       //   ref: 'Reviews',
       //   require: true
       // }
     ],
-   
+
     isActive: Boolean
   },
   {
@@ -53,9 +53,6 @@ const padelFieldsSchema = new Schema(
     versionKey: false
   }
 )
-
-
-
 
 padelFieldsSchema.set('toJSON', {
   transform: (document, returnedObject) => {
