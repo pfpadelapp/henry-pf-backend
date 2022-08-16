@@ -8,11 +8,11 @@ const reviewsSchema = new Schema(
       min: 1,
       max: 5
     },
-    review: {       
-      type: String   
+    review: {
+      type: String
     },
     idUser: [],
-   
+
     isActive: Boolean
   },
   {
@@ -36,8 +36,6 @@ reviewsSchema.set('toJSON', {
 //   this.populate(query);
 //   next();
 // });
-
-
 
 const Reviews = model('Reviews', reviewsSchema)
 

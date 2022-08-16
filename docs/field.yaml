@@ -36,7 +36,7 @@ paths:
         - in: query
           name: typeField
           required: true
-          schema: 
+          schema:
             type: string
       responses:
         200:
@@ -100,7 +100,7 @@ definitions:
           location:
             type: string
           owner:
-            type: string 
+            type: string
             format: objectId
           type:
             type: string

@@ -32,7 +32,6 @@ const swaggerSpec = swaggerJsDoc(options)
 
 server.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec))
 
-
 server.name = 'API'
 
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))

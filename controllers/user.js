@@ -48,17 +48,27 @@ async function deleteUserById(userId) {
   }
 }
 
-async function updateUser(userId, password, username, contact ){
-  try{
-    if(password !== undefined){
+async function updateUser(userId, password, username, contact) {
+  try {
+    if (password !== undefined) {
       const salt = await bcrypt.genSalt(10)
       const hash = await bcrypt.hash(password, salt)
-      const updatedUser = await User.findByIdAndUpdate(userId, {password: hash, contact, username}, {new: true})
+      const updatedUser = await User.findByIdAndUpdate(
+        userId,
+        { password: hash, contact, username },
+        { new: true }
+      )
       return updatedUser
     }
-  }catch(e){
+  } catch (e) {
     return e
   }
 }
 
-module.exports = { getUserById, getAllUsers, createUser, deleteUserById, updateUser }
+module.exports = {
+  getUserById,
+  getAllUsers,
+  createUser,
+  deleteUserById,
+  updateUser
+}
