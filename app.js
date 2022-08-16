@@ -20,7 +20,7 @@ const swaggerDefinition = {
       title: 'PadelApp API',
       version: '1.0.0'
     },
-    servers: [{ url: 'https://pf-padel-app.herokuapp.com/' }]
+    servers: [{ url: 'https://pf-padel-app.herokuapp.com' }]
   }
 }
 const options = {
