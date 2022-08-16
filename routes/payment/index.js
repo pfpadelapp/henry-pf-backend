@@ -3,12 +3,11 @@
 require('dotenv').config()
 const request = require('request')
 const { Router } = require('express')
-const { CLIENT, SECRET } = process.env
 
 const router = Router()
 const PAYPAL_API = 'https://api-m.sandbox.paypal.com'
 
-const auth = { user: CLIENT, pass: SECRET }
+const auth = { user: process.env.CLIENT, pass: process.env.SECRET }
 
 router.post('/createPayment', (req, res) => {
   try {

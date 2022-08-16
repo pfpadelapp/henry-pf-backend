@@ -1,7 +1,6 @@
 'use strict'
 
 require('dotenv').config()
-const { USER_MAIL, PASS_MAIL } = process.env
 const nodemailer = require('nodemailer')
 
 function createTrans() {
@@ -10,8 +9,8 @@ function createTrans() {
     port: 465,
     secure: true,
     auth: {
-      user: USER_MAIL,
-      pass: PASS_MAIL
+      user: process.env.USER_MAIL,
+      pass: process.env.PASS_MAIL
     }
   })
 
