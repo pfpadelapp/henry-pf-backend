@@ -13,7 +13,6 @@ const server = express()
 
 const swaggerUI = require('swagger-ui-express')
 const swaggerJsDoc = require('swagger-jsdoc')
-
 const swaggerDefinition = {
   definition: {
     openapi: '3.0.0',
@@ -23,20 +22,14 @@ const swaggerDefinition = {
     },
     servers: [{ url: 'http://localhost:3000' }]
   }
-
 }
-
 const options = {
   swaggerDefinition,
   apis: ['./docs/**/*.yaml']
 }
-
 const swaggerSpec = swaggerJsDoc(options)
-
 server.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerSpec))
-
 server.name = 'API'
-
 server.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }))
 server.use(bodyParser.json({ limit: '50mb' }))
 server.use(morgan('dev'))
