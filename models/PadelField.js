@@ -34,6 +34,18 @@ const padelFieldsSchema = new Schema(
       type: Number,
       require: true
     },
+    ratingsAverage: {
+      type: Number
+    },
+    horario: [],
+    review: [
+      // {
+      //   type: Schema.Types.ObjectId,
+      //   ref: 'Reviews',
+      //   require: true
+      // }
+    ],
+
     isActive: Boolean
   },
   {
@@ -48,6 +60,12 @@ padelFieldsSchema.set('toJSON', {
     delete returnedObject._id
   }
 })
+
+// padelFieldsSchema.virtual('reviews', {
+//   ref: 'Reviews',
+//   foreignField: 'padelFields',
+//   localField: '_id',
+// });
 
 const Field = model('padelFields', padelFieldsSchema)
 module.exports = Field

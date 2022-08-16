@@ -1,5 +1,7 @@
 const PadelField = require('../models/PadelField')
 const Owner = require('../models/Owner')
+const Reviews = require('../models/Reviews')
+const User = require('../models/User')
 
 async function getAllFields() {
   try {
@@ -99,27 +101,130 @@ async function searhcFieldByName(name) {
   }
 }
 
-async function getPriceByRange(minPrice, maxPrice)
-{
-  try
-  {
-    const result = await PadelField.find(
-      {
-        isActive: true,
-        price:
-        {
-          $gte: minPrice,
-          $lte: maxPrice
-        }
-      });
+async function getPriceByRange(minPrice, maxPrice) {
+  try {
+    const result = await PadelField.find({
+      isActive: true,
+      price: {
+        $gte: minPrice,
+        $lte: maxPrice
+      }
+    })
 
-    return result;
-  }
-  catch(e)
-  {
-    return e;
+    return result
+  } catch (e) {
+    return e
   }
 }
+
+async function updateField(
+  fieldId,
+  price,
+  availability,
+  image,
+  name,
+  location,
+  type,
+  horario,
+  isActive
+) {
+  try {
+    const updateField = await PadelField.findByIdAndUpdate(
+      fieldId,
+      { price, availability, image, name, location, type, horario, isActive },
+      { new: true }
+    )
+    return updateField
+  } catch (e) {
+    return e
+  }
+}
+
+async function registerReviews(fieldId, idUser, rating, review) {
+  try {
+    const newReviews = await Reviews.create({
+      idUser,
+      rating,
+      review
+    })
+    await PadelField.findByIdAndUpdate(fieldId, {
+      $push: {
+        review: {
+          rating,
+          idUser,
+          review
+        }
+      }
+    })
+
+    await User.findByIdAndUpdate(idUser, {
+      $push: {
+        review: {
+          fieldId,
+          _id: newReviews._id
+        }
+      }
+    })
+    return newReviews.save()
+  } catch (e) {
+    return e
+  }
+}
+
+async function getReviews() {
+  try {
+    const reviews = await Reviews.find({ isActive: true })
+    return reviews
+  } catch (e) {
+    return e
+  }
+}
+
+async function getAverage(fieldId) {
+  try {
+    const result = await PadelField.findById(fieldId)
+    // console.log(result)
+    const result2 =
+      (await result.review.reduce((acc, curr) => acc + curr.rating, 0)) /
+      result.review.length
+    // console.log(result2)
+    // return result2
+    const result3 = Math.ceil(result2)
+    console.log(result3)
+
+    await PadelField.findByIdAndUpdate(fieldId, {
+      ratingsAverage: result3
+    })
+  } catch (e) {
+    return e
+  }
+}
+
+// async function getAverage(idField) {
+//   try{
+//     let arr = []
+//     const result = await PadelField.findById(idField)
+//     const hola = await result.review
+//     for (const [rating, value] of hola) {
+
+//     }
+//   }
+//   catch(e){}
+// }
+
+// async function getAverageRating(fieldId) {
+//      try {
+//           const reviews = await Reviews.find({
+//                    _id: { $in: result.review },
+//                     isActive: true     })
+//                     let sum = 0
+//                     for (let i = 0; i < reviews.length; i++)
+//                     {       sum += reviews[i].rating     }
+//                       const average = sum / reviews.length
+//                           return average
+//                          } catch (e)
+//                          {     return e
+//                          } }
 
 module.exports = {
   deleteField,
@@ -130,5 +235,9 @@ module.exports = {
   filterByAvailability,
   sortFieldBy,
   searhcFieldByName,
-  getPriceByRange
+  getPriceByRange,
+  updateField,
+  registerReviews,
+  getReviews,
+  getAverage
 }

@@ -8,8 +8,8 @@
   },
   "scripts": {
     "test": "tap \"test/**/*.test.js\"",
-    "start": "fastify start -l info app.js",
-    "dev": "fastify start -w -l info -P app.js",
+    "dev": "nodemon -L -e yaml, js, json ",
+    "start": "node app.js",
     "lint": "eslint --fix . --ext .js",
     "format": "prettier --write ."
   },
@@ -29,12 +29,26 @@
     "@fastify/cors": "^8.1.0",
     "@fastify/jwt": "^6.3.2",
     "@fastify/sensible": "^4.1.0",
+
+    "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "express-jwt": "^7.7.5",
     "fastify": "^4.0.0",
+    "fastify-auth0-verify": "^0.8.0",
     "fastify-cli": "^4.4.0",
     "fastify-plugin": "^3.0.0",
-    "mongoose": "^6.5.0"
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^2.1.4",
+    "mongoose": "^6.5.0",
+    "morgan": "^1.10.0",
+    "nodemailer": "^6.7.8",
+    "request": "^2.88.2",
+    "swagger-jsdoc": "^6.2.5",
+    "swagger-ui-express": "^4.5.0"
   },
   "devDependencies": {
     "@fastify/swagger": "^7.4.1",
@@ -44,6 +58,7 @@
     "eslint-plugin-import": "^2.26.0",
     "eslint-plugin-n": "^15.2.4",
     "eslint-plugin-promise": "^6.0.0",
+    "nodemon": "^2.0.19",
     "prettier": "^2.7.1",
     "tap": "^16.1.0"
   }
