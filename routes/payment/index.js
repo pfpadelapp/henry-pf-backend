@@ -33,7 +33,7 @@ router.post('/createPayment', (req, res)=>
                 brand_name: 'Padel Field',
                 landing_page: 'NO_PREFERENCE',
                 user_action: 'PAY_NOW',
-                return_url: `http://localhost:5173/detail/${idField}`,
+                return_url: `http://localhost:5173/resultadoPago`,
                 cancel_url: `http://localhost:5173/detail/${idField}`
             }
         };
