@@ -21,6 +21,14 @@ async function getFieldById(ownerId) {
   }
 }
 
+function taxes(price){
+
+  const result =  price + (price * 0.1) + (price * 0.05)
+  return result
+  
+  } 
+
+
 async function registerField(name, location, image, type, price, ownerId) {
   try {
     const newField = await PadelField.create({
@@ -28,7 +36,7 @@ async function registerField(name, location, image, type, price, ownerId) {
       location,
       image,
       type,
-      price,
+      price: taxes(price) ,
       owner: ownerId,
       isActive: true,
       availability: true
@@ -45,6 +53,7 @@ async function registerField(name, location, image, type, price, ownerId) {
     return e
   }
 }
+
 
 async function deleteField(fieldId) {
   try {
