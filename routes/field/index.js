@@ -87,6 +87,8 @@ router.get('/:filedId', async function (request, reply) {
   }
 })
 
+
+
 router.post('/', async function (request, reply) {
   const { name, location, image, type, price, ownerId, availability } =
     request.body
@@ -105,6 +107,8 @@ router.post('/', async function (request, reply) {
     return e
   }
 })
+
+
 
 router.delete('/:fieldId', async function (request, reply) {
   const { fieldId } = request.params
