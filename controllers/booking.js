@@ -2,6 +2,7 @@ const Booking = require('../models/Booking')
 const { sendMail } = require('../utils/email')
 const { getUserById } = require('./user')
 const { getFieldById } = require('./field')
+const  User = require('../models/User')
 
 const horarios = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 
@@ -30,6 +31,15 @@ async function setNewBooking(idUser, idField, date) {
     const subject = 'Confirmacion de reservacion'
     const body = `Hola ${user.name}, has reservado la cancha ${field.name} para el dia ${date}`
     sendMail(user.email, body, subject)
+
+    await User.findByIdAndUpdate(idUser, {
+      $push: {
+        history: {
+          newBooking
+        }
+      }
+    })
+
     return newBooking
   } catch (e) {
     return e
