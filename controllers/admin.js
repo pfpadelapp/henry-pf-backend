@@ -30,6 +30,8 @@ async function searchUsers(username) {
           _id: u._id,
           username: u.username,
           email: u.email,
+          isActive: u.isActive,
+          role: u.role
         }
       })
       return userFilter
@@ -46,6 +48,8 @@ async function searchOwner(username) {
         _id: o._id,
         username: o.username,
         email: o.email,
+        isActive: o.isActive,
+        role: o.role
       }
     } )
     return ownerFilter
