@@ -1,5 +1,7 @@
 const Admin = require('../models/Admin')
 const bcrypt = require('bcrypt')
+const User = require('../models/User')
+const Owner = require('../models/Owner')
 
 async function getAllAdmins() {
   try {
@@ -19,6 +21,38 @@ async function getAdminById(adminId) {
     }
   }
 
+async function searchUsers(username) {
+
+    try {
+      const users = await User.find({ username: { $regex: username, $options: 'i' }})
+      const userFilter = users.map(u => {
+        return {
+          _id: u._id,
+          username: u.username,
+          email: u.email,
+        }
+      })
+      return userFilter
+    } catch (e) {
+      return e
+    }
+  }
+
+async function searchOwner(username) {
+  try{
+    const owner = await Owner.find({ username: { $regex: username, $options: 'i' }})
+    const ownerFilter = owner.map(o => {
+      return {
+        _id: o._id,
+        username: o.username,
+        email: o.email,
+      }
+    } )
+    return ownerFilter
+  }catch(e){
+    return e
+  }
+}
 
   
 async function createAdmin(name, email, username, password ) {
@@ -71,5 +105,7 @@ module.exports = {
     getAllAdmins,
     createAdmin,
     deleteAdminById,
-    updatedAdmin
+    updatedAdmin,
+    searchUsers,
+    searchOwner
   }
