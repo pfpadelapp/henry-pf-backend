@@ -6,7 +6,8 @@ const {
   getOwnerById,
   createOwner,
   deleteOwnerById,
-  updatedOwner
+  updatedOwner,
+  ableOwner
 } = require('../../controllers/owner')
 const { sendMail } = require('../../utils/email')
 
@@ -67,6 +68,18 @@ router.delete('/:ownerId', async function (request, reply) {
     return e
   }
 })
+
+
+router.put('/able/:ownerId', async function (request, reply) {
+  const { ownerId } = request.params
+  try {
+    const updateResult = await ableOwner(ownerId)
+    return reply.send(updateResult)
+  } catch (e) {
+    return e
+  }
+})
+
 
 router.put('/:ownerId', async function (request, reply) {
   const { ownerId } = request.params
