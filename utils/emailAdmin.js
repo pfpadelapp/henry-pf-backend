@@ -5,24 +5,23 @@ const nodemailer = require('nodemailer')
 
 function createTrans() {
   const transport = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
+    host: 'smtp.gmail.com', // 'smtp.gmail.com',
     port: 465,
     secure: true,
     auth: {
-      user: process.env.USER_MAIL,
-      pass: process.env.PASS_MAIL
+      user: process.env.USER_MAIL, // 'afton89@ethereal.email', // 
+      pass: process.env.PASS_MAIL // 'kChY5RUvWaZFbjQ4BG'
     }
   })
-
   return transport
 }
 
-async function sendMail(emailDestiny, body, subject) {
+
+async function sendMail(mail, body) {
   const transporter = createTrans()
   const info = await transporter.sendMail({
-    from: '"Padel Field" <pf.henry.padel@gmail.com>',
-    to: emailDestiny,
-    subject,
+    from: '<pf.henry.padel@gmail.com>',// `<${mail}>`, // admin request to SuperAdmin
+    to: `<${mail}>`, // 'afton89@ethereal.email',
     html: body
   })
 

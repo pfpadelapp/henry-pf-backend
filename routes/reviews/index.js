@@ -3,8 +3,8 @@ const { Router } = require('express')
 const router = Router()
 
 const {
-  getReviews
-  // registerReviews
+  getReviews,
+  deleteReviewById
 } = require('../../controllers/reviews')
 
 // A modo de prueba!!
@@ -13,6 +13,16 @@ router.get('/', async function (request, reply) {
   try {
     const reviews = await getReviews()
     return reply.send(reviews)
+  } catch (e) {
+    return e
+  }
+})
+
+router.delete('/:reviewId', async function (request, reply) {
+  const { reviewId } = request.params
+  try {
+    const deletedReview = await deleteReviewById(reviewId)
+    return reply.send(deletedReview)
   } catch (e) {
     return e
   }
