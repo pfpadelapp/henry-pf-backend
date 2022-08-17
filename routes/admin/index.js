@@ -6,7 +6,9 @@ const {
     // getAdminById,
     createAdmin,
     deleteAdminById,
-    updatedAdmin
+    updatedAdmin,
+    searchUsers,
+    searchOwner
 } = require('../../controllers/admin')
 
 const {
@@ -79,6 +81,27 @@ router.post('/', async (request, reply) => {
       return e
     }
   })
+
+router.get('/searchU', async (req, res) => {
+  const { username } = req.query
+  try{
+    const user = await searchUsers(username)
+    return res.send(user)
+  }catch(e){
+    return e
+  }
+})
+
+router.get('/searchO', async (req, res) => {
+  const { username } = req.query
+  try{
+    const owner = await searchOwner(username)
+    return res.send(owner)
+  }catch(e){
+    return e
+  }
+})
+
 
 
 // ----------- ADMIN FUNCTIONS --------/
