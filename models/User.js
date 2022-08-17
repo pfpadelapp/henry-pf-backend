@@ -43,9 +43,7 @@ const userSchema = new Schema(
     score: {
       type: Number
     },
-    history: {
-      type: Array
-    },
+    history: [],
     review: [],
     padelFields: [],
     isActive: Boolean
