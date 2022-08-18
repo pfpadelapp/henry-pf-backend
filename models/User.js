@@ -21,7 +21,6 @@ const userSchema = new Schema(
     },
     contact: {
       type: Number,
-      require: true
     },
     username: {
       type: String,
