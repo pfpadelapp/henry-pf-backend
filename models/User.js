@@ -5,7 +5,6 @@ const userSchema = new Schema(
   {
     name: {
       type: String,
-      require: true,
       trim: true
     },
     email: {
@@ -22,22 +21,18 @@ const userSchema = new Schema(
     },
     contact: {
       type: Number,
-      unique: true,
       require: true
     },
     username: {
       type: String,
-      require: true,
       trim: true
     },
     lastName: {
       type: String,
-      require: true,
       trim: true
     },
     role: {
       type: String,
-      require: true,
       default: 'user'
     },
     score: {
