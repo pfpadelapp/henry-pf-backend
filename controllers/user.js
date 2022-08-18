@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 
 async function getAllUsers() {
   try {
-    const users = await User.find({ isActive: true })
+    const users = await User.find({ user_metadata: { isActive: 'true' } })
     return users
   } catch (e) {
     return e
