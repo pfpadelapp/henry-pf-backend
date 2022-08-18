@@ -1,4 +1,4 @@
-'use strict'
+/* 'use strict'
 
 require('dotenv').config()
 const nodemailer = require('nodemailer')
@@ -31,3 +31,4 @@ async function sendMail(emailDestiny, body, subject) {
 
 
 module.exports = { sendMail }
+ */

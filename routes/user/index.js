@@ -9,7 +9,7 @@ const {
   updateUser,
   ableUser
 } = require('../../controllers/user')
-const { sendMail } = require('../../utils/email')
+// const { sendMail } = require('../../utils/email')
 
 require('dotenv')
 const user = require('../../models/User')
@@ -55,11 +55,11 @@ router.post('/', async function (request, reply) {
       email,
       password
     )
-    const token = tokenGenerator({ newUser })
-    const subject = 'Bienvenido a Padel Field'
-    const body = `Hola ${name}, gracias por registrarte en Padel Field`
-    sendMail(email, body, subject)
-    return reply.send({ newUser, token })
+    // const token = tokenGenerator({ newUser })
+    // const subject = 'Bienvenido a Padel Field'
+    // const body = `Hola ${name}, gracias por registrarte en Padel Field`
+    // sendMail(email, body, subject)
+    return reply.send({ newUser /* , token  */ })
   } catch (e) {
     return e
   }
@@ -103,7 +103,6 @@ router.delete('/:userId', async function (request, reply) {
     return e
   }
 })
-
 
 router.put('/able/:userId', async function (request, reply) {
   const { userId } = request.params
