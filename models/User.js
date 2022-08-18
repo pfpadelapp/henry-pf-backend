@@ -20,7 +20,7 @@ const userSchema = new Schema(
       trim: true
     },
     contact: {
-      type: Number,
+      type: Number
     },
     username: {
       type: String,
@@ -40,7 +40,7 @@ const userSchema = new Schema(
     history: [],
     review: [],
     padelFields: [],
-    isActive: Boolean
+    isActive: { type: Boolean, default: true }
   },
   {
     timestamps: true,
@@ -54,7 +54,6 @@ userSchema.set('toJSON', {
     delete returnedObject._id
   }
 })
-
 
 userSchema.pre('save', async function (next) {
   const salt = await bcrypt.genSalt()
