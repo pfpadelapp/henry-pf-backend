@@ -63,10 +63,26 @@ async function updatedOwner(ownerId, password, username, contact) {
   }
 }
 
+
+async function ableOwner(userId) {
+  try {
+    const ableOwner = await Owner.findByIdAndUpdate(
+      userId,
+        { isActive: true },
+        // { new: true }
+    )
+    return ableOwner
+  } catch (e) {
+    return e
+  }
+}
+
+
 module.exports = {
   getOwnerById,
   getAllOwners,
   createOwner,
   deleteOwnerById,
-  updatedOwner
+  updatedOwner,
+  ableOwner
 }

@@ -65,10 +65,26 @@ async function updateUser(userId, password, username, contact) {
   }
 }
 
+
+async function ableUser(userId) {
+  try {
+    const ableUser = await User.findByIdAndUpdate(
+      userId,
+        { isActive: true },
+        // { new: true }
+    )
+    return ableUser
+  } catch (e) {
+    return e
+  }
+}
+
+
 module.exports = {
   getUserById,
   getAllUsers,
   createUser,
   deleteUserById,
-  updateUser
+  updateUser,
+  ableUser
 }
