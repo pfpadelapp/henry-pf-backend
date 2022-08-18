@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 
 async function getAllUsers() {
   try {
-    const users = await User.find({ isActive: true })
+    const users = await User.find()
     return users
   } catch (e) {
     return e
@@ -28,8 +28,7 @@ async function createUser(username, name, lastName, contact, email, password) {
       lastName,
       contact,
       email,
-      password,
-      isActive: true
+      password
     })
     return newUser
   } catch (e) {
@@ -69,8 +68,7 @@ async function ableUser(userId) {
   try {
     const ableUser = await User.findByIdAndUpdate(
       userId,
-      { isActive: true }
-      // { new: true }
+      { isActive: true },
     )
     return ableUser
   } catch (e) {
