@@ -5,14 +5,13 @@ const ownerSchema = new Schema(
   {
     name: {
       type: String,
-      require: true,
+
       trim: true
     },
     email: {
       type: String,
       trim: true,
       unique: true,
-      require: true,
       lowercase: true
     },
     contact: {
@@ -22,7 +21,6 @@ const ownerSchema = new Schema(
     },
     password: {
       type: String,
-      require: true,
       trim: true
     },
     role: {
@@ -31,7 +29,6 @@ const ownerSchema = new Schema(
     },
     username: {
       type: String,
-      require: true,
       trim: true
     },
     padelFields: [],
