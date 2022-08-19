@@ -5,7 +5,7 @@ const Owner = require('../models/Owner')
 
 async function getAllAdmins() {
   try {
-    const admin = await Admin.find({ isActive: true })
+    const admin = await Admin.find()
     return admin
   } catch (e) {
     return e
@@ -58,22 +58,27 @@ async function searchOwner(username) {
   }
 }
 
-  
 async function createAdmin(name, email, username, password ) {
-    try {
-      const newAdmin = await Admin.create({
-        name,
-        email,
-        username, 
-        password,
-        isActive: true,
-        // role: null
-      })
-      return newAdmin
-    } catch (e) {
-      return e
+  try {
+    const verifyEmail = await Admin.find({email})
+    console.log(verifyEmail)
+    if(verifyEmail.length > 0) {
+      return 'This email already exists'
     }
+    const newAdmin = await Admin.create({
+      name,
+      email,
+      username, 
+      password,
+      isActive: true,
+      // role: null
+    })
+    return newAdmin
+  } catch (e) {
+    return e
   }
+}
+
 
   async function deleteAdminById(AdminId) {
     try {
@@ -85,6 +90,8 @@ async function createAdmin(name, email, username, password ) {
       return e
     }
   }
+
+  
   
   async function updatedAdmin(AdminId, password, username) {
     try {
@@ -104,6 +111,19 @@ async function createAdmin(name, email, username, password ) {
   }
 
 
+  async function ableAdmin(adminId) {
+    try {
+      const ableAdmin = await Admin.findByIdAndUpdate(
+        adminId,
+          { isActive: true },
+          // { new: true }
+      )
+      return ableAdmin
+    } catch (e) {
+      return e
+    }
+  }
+
 module.exports = {
     getAdminById,
     getAllAdmins,
@@ -111,5 +131,6 @@ module.exports = {
     deleteAdminById,
     updatedAdmin,
     searchUsers,
-    searchOwner
+    searchOwner,
+    ableAdmin
   }
