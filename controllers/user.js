@@ -20,7 +20,8 @@ async function getUserById(userId) {
   }
 }
 
-async function createUser(username, name, lastName, contact, email, password) {
+
+async function createUser(username, name, lastName, contact, email, password, user_metadata) {
   try {
     const newUser = await User.create({
       username,
@@ -28,7 +29,8 @@ async function createUser(username, name, lastName, contact, email, password) {
       lastName,
       contact,
       email,
-      password
+      password,
+      user_metadata
     })
     return newUser
   } catch (e) {
@@ -39,22 +41,23 @@ async function createUser(username, name, lastName, contact, email, password) {
 async function deleteUserById(userId) {
   try {
     const deletedUser = await User.findByIdAndUpdate(userId, {
-      isActive: false
-    })
+      'user_metadata.isActive': false}, 
+      { new: true })
+
     return deletedUser
   } catch (e) {
     return e
   }
 }
 
-async function updateUser(userId, password, username, contact) {
+async function updateUser(userId, password, username, contact, user_metadata) {
   try {
     if (password !== undefined) {
       const salt = await bcrypt.genSalt(10)
       const hash = await bcrypt.hash(password, salt)
       const updatedUser = await User.findByIdAndUpdate(
         userId,
-        { password: hash, contact, username },
+        { password: hash, contact, username, user_metadata },
         { new: true }
       )
       return updatedUser
@@ -66,7 +69,11 @@ async function updateUser(userId, password, username, contact) {
 
 async function ableUser(userId) {
   try {
-    const ableUser = await User.findByIdAndUpdate(userId, { isActive: true })
+    const ableUser = await User.findByIdAndUpdate(
+      userId,
+        { 'user_metadata.isActive': true },
+        { new: true }
+    )
     return ableUser
   } catch (e) {
     return e
