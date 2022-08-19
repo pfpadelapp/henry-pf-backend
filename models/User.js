@@ -52,7 +52,6 @@ const userSchema = new Schema(
       },
       isActive: {
         type: Boolean,
-        default: true
       }
     },
     // isActive: Boolean
