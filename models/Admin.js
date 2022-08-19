@@ -5,29 +5,24 @@ const adminSchema = new Schema(
   {
     name: {
       type: String,
-      require: true,
       trim: true
     },
     email: {
       type: String,
       trim: true,
       unique: true,
-      require: true,
       lowercase: true
     },
     password: {
       type: String,
-      require: true,
       trim: true
     },
     role: {
       type: String,
-      require: true,
       default: 'Admin'
     },
     username: {
       type: String,
-      require: true,
       trim: true
     },
     isActive: Boolean

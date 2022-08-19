@@ -28,8 +28,7 @@ async function createUser(username, name, lastName, contact, email, password) {
       lastName,
       contact,
       email,
-      password,
-      isActive: true
+      password
     })
     return newUser
   } catch (e) {
@@ -65,20 +64,14 @@ async function updateUser(userId, password, username, contact) {
   }
 }
 
-
 async function ableUser(userId) {
   try {
-    const ableUser = await User.findByIdAndUpdate(
-      userId,
-        { isActive: true },
-        // { new: true }
-    )
+    const ableUser = await User.findByIdAndUpdate(userId, { isActive: true })
     return ableUser
   } catch (e) {
     return e
   }
 }
-
 
 module.exports = {
   getUserById,

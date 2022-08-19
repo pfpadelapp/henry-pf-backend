@@ -20,8 +20,7 @@ const userSchema = new Schema(
       trim: true
     },
     contact: {
-      type: Number,
-      require: true
+      type: Number
     },
     username: {
       type: String,
@@ -54,7 +53,6 @@ userSchema.set('toJSON', {
     delete returnedObject._id
   }
 })
-
 
 userSchema.pre('save', async function (next) {
   const salt = await bcrypt.genSalt()
