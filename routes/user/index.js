@@ -45,7 +45,7 @@ router.get('/:userId', async function (request, reply) {
 })
 
 router.post('/', async function (request, reply) {
-  const { username, name, lastName, contact, email, password } = request.body
+  const { username, name, lastName, contact, email, password, user_metadata } = request.body
   try {
     const newUser = await createUser(
       username,
@@ -53,7 +53,8 @@ router.post('/', async function (request, reply) {
       lastName,
       contact,
       email,
-      password
+      password,
+      user_metadata
     )
     const token = tokenGenerator({ newUser })
     const subject = 'Bienvenido a Padel Field'
@@ -117,9 +118,9 @@ router.put('/able/:userId', async function (request, reply) {
 
 router.put('/:userId', async function (request, reply) {
   const { userId } = request.params
-  const { password, contact, username } = request.body
+  const { password, contact, username, user_metadata } = request.body
   try {
-    const updateResult = await updateUser(userId, password, username, contact)
+    const updateResult = await updateUser(userId, password, username, contact, user_metadata)
     return reply.send(updateResult)
   } catch (e) {
     return e

@@ -40,7 +40,21 @@ const userSchema = new Schema(
     history: [],
     review: [],
     padelFields: [],
-    isActive: Boolean
+    user_metadata: {
+      telePhone: {
+        type: Number
+      },
+      city: {
+        type: String
+      },
+      rol: {
+        type: String
+      },
+      isActive: {
+        type: Boolean,
+      }
+    },
+    // isActive: Boolean
   },
   {
     timestamps: true,
