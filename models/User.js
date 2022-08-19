@@ -40,7 +40,6 @@ const userSchema = new Schema(
     history: [],
     review: [],
     padelFields: [],
-    isActive: { type: Boolean, default: true }
   },
   {
     timestamps: true,
