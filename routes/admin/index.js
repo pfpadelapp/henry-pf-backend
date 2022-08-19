@@ -8,7 +8,8 @@ const {
     deleteAdminById,
     updatedAdmin,
     searchUsers,
-    searchOwner
+    searchOwner,
+    ableAdmin
 } = require('../../controllers/admin')
 
 const {
@@ -29,22 +30,26 @@ const {
 const { sendMail } = require('../../utils/email')
 
 router.post('/', async (request, reply) => {
-    try {
-        const { name, email, username, password } = request.body
-        try {
-          const newAdmin = await createAdmin(name, email, username, password)
-          console.log(newAdmin)
+  try {
+      const { name, email, username, password } = request.body
+      try {
+        const newAdmin = await createAdmin(name, email, username, password)
+        console.log(newAdmin)
+        if(typeof newAdmin !== 'string') {
           const subject = 'Ahora eres admin de Padel Field App'
           const body = `Bienvenido ${name}, ahora eres admin )`
           sendMail(email, body, subject)
           return reply.send( newAdmin )
-        } catch (e) {
-          return e
         }
-    } catch (e) {
-      return e
-    }
-  })
+        return reply.send({msg: newAdmin})
+        
+      } catch (e) {
+        return e
+      }
+  } catch (e) {
+    return e
+  }
+})
 
 
   router.get('/', async function (request, reply) { 
@@ -98,6 +103,17 @@ router.get('/searchO', async (req, res) => {
     const owner = await searchOwner(username)
     return res.send(owner)
   }catch(e){
+    return e
+  }
+})
+
+
+router.put('/able/:adminId', async function (request, reply) {
+  const { adminId } = request.params
+  try {
+    const updateResult = await ableAdmin(adminId)
+    return reply.send(updateResult)
+  } catch (e) {
     return e
   }
 })

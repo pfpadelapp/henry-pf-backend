@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 
 async function getAllUsers() {
   try {
-    const users = await User.find()
+    const users = await User.find({ 'user_metadata.isActive': false })
     return users
   } catch (e) {
     return e
@@ -67,7 +67,6 @@ async function updateUser(userId, password, username, contact, user_metadata) {
   }
 }
 
-
 async function ableUser(userId) {
   try {
     const ableUser = await User.findByIdAndUpdate(
@@ -80,7 +79,6 @@ async function ableUser(userId) {
     return e
   }
 }
-
 
 module.exports = {
   getUserById,
