@@ -45,10 +45,10 @@ router.get('/:userId', async function (request, reply) {
 })
 
 router.post('/', async function (request, reply) {
-  const { nickname, name, lastName, contact, email, password, user_metadata } = request.body
+  const { name, lastName, contact, email, password, user_metadata } = request.body
   try {
     const newUser = await createUser(
-      nickname,
+      
       name,
       lastName,
       contact,
@@ -56,6 +56,7 @@ router.post('/', async function (request, reply) {
       password,
       user_metadata
     )
+    console.log(newUser)
     // const token = tokenGenerator({ newUser })
     // const subject = 'Bienvenido a Padel Field'
     // const body = `Hola ${name}, gracias por registrarte en Padel Field`
