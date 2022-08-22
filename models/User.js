@@ -54,7 +54,7 @@ const userSchema = new Schema(
         type: Boolean,
       }
     },
-    // isActive: Boolean
+    isActive: Boolean
   },
   {
     timestamps: true,
