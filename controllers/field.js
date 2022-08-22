@@ -181,14 +181,14 @@ async function registerReviews(fieldId, idUser, rating, review) {
   }
 }
 
-async function getReviews() {
-  try {
-    const reviews = await Reviews.find({ isActive: true })
-    return reviews
-  } catch (e) {
-    return e
-  }
-}
+// async function getReviews() {
+//   try {
+//     const reviews = await Reviews.find({ isActive: true })
+//     return reviews
+//   } catch (e) {
+//     return e
+//   }
+// }
 
 async function getAverage(fieldId) {
   try {
@@ -279,7 +279,7 @@ module.exports = {
   getPriceByRange,
   updateField,
   registerReviews,
-  getReviews,
+  // getReviews,
   getAverage,
   enableField,
   getAllFieldsPanel,
