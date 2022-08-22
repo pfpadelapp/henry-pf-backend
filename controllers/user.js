@@ -20,15 +20,20 @@ async function getUserById(userId) {
   }
 }
 
+// function nick(email){
+//   // return email.substring(0, email.indexOf('@'))
+//   return email.split('@')[0]
+// }
 
-async function createUser(nickname, name, lastName, contact, email, password, user_metadata) {
+async function createUser( name, lastName, contact, email, password, user_metadata) {
+  console.log( name, lastName, contact, email, password, user_metadata)
   try {
     const newUser = await User.create({
-      nickname,
       name,
       lastName,
       contact,
       email,
+      nickname: email.split('@')[0],
       password,
       user_metadata
     })
