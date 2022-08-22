@@ -21,10 +21,10 @@ async function getUserById(userId) {
 }
 
 
-async function createUser(username, name, lastName, contact, email, password, user_metadata) {
+async function createUser(nickname, name, lastName, contact, email, password, user_metadata) {
   try {
     const newUser = await User.create({
-      username,
+      nickname,
       name,
       lastName,
       contact,
@@ -50,14 +50,14 @@ async function deleteUserById(userId) {
   }
 }
 
-async function updateUser(userId, password, username, contact, user_metadata) {
+async function updateUser(userId, password, nickname, contact, user_metadata) {
   try {
     if (password !== undefined) {
       const salt = await bcrypt.genSalt(10)
       const hash = await bcrypt.hash(password, salt)
       const updatedUser = await User.findByIdAndUpdate(
         userId,
-        { password: hash, contact, username, user_metadata },
+        { password: hash, contact, nickname, user_metadata },
         { new: true }
       )
       return updatedUser
