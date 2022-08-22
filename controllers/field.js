@@ -149,10 +149,11 @@ async function updateField(
   }
 }
 
-async function registerReviews(fieldId, idUser, rating, review) {
+async function registerReviews(fieldId, idUser,name, rating, review) {
   try {
     const newReviews = await Reviews.create({
       idUser,
+      name,
       rating,
       review
     })
@@ -161,6 +162,7 @@ async function registerReviews(fieldId, idUser, rating, review) {
         review: {
           rating,
           idUser,
+          name,
           review,
           reviewId: newReviews.id
         }

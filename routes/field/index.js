@@ -177,9 +177,9 @@ router.put('/:fieldId', async function (request, reply) {
 router.post('/:id/reviews', async function (request, reply) {
   const fieldId = request.params.id
   try {
-    const { idUser, rating, review } = request.body
+    const { idUser, name, rating, review } = request.body
 
-    const newReviews = await registerReviews(fieldId, idUser, rating, review)
+    const newReviews = await registerReviews(fieldId, idUser, name, rating, review)
     await getAverage(fieldId)
     return reply.send(newReviews)
   } catch (e) {
