@@ -22,7 +22,7 @@ const userSchema = new Schema(
     contact: {
       type: Number
     },
-    username: {
+    nickname: {
       type: String,
       trim: true
     },
