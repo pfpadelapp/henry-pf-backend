@@ -21,14 +21,14 @@ async function getAdminById(adminId) {
     }
   }
 
-async function searchUsers(username) {
+async function searchUsers(name) {
 
     try {
-      const users = await User.find({ username: { $regex: username, $options: 'i' }})
+      const users = await User.find({ name: { $regex: name, $options: 'i' }})
       const userFilter = users.map(u => {
         return {
           _id: u._id,
-          username: u.username,
+          name: u.name,
           email: u.email,
           isActive: u.isActive,
           role: u.role
@@ -40,13 +40,13 @@ async function searchUsers(username) {
     }
   }
 
-async function searchOwner(username) {
+async function searchOwner(name) {
   try{
-    const owner = await Owner.find({ username: { $regex: username, $options: 'i' }})
+    const owner = await Owner.find({ name: { $regex: name, $options: 'i' }})
     const ownerFilter = owner.map(o => {
       return {
         _id: o._id,
-        username: o.username,
+        name: o.name,
         email: o.email,
         isActive: o.isActive,
         role: o.role
