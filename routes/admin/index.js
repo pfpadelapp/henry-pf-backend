@@ -88,9 +88,9 @@ router.post('/', async (request, reply) => {
   })
 
 router.get('/searchU', async (req, res) => {
-  const { username } = req.query
+  const { name } = req.query
   try{
-    const user = await searchUsers(username)
+    const user = await searchUsers(name)
     return res.send(user)
   }catch(e){
     return e
@@ -98,9 +98,9 @@ router.get('/searchU', async (req, res) => {
 })
 
 router.get('/searchO', async (req, res) => {
-  const { username } = req.query
+  const { name } = req.query
   try{
-    const owner = await searchOwner(username)
+    const owner = await searchOwner(name)
     return res.send(owner)
   }catch(e){
     return e
