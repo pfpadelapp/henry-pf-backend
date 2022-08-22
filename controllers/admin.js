@@ -30,7 +30,7 @@ async function searchUsers(name) {
           _id: u._id,
           name: u.name,
           email: u.email,
-          isActive: u.isActive,
+          isActive: u.user_metadata.isActive,
           role: u.role
         }
       })
@@ -48,7 +48,7 @@ async function searchOwner(name) {
         _id: o._id,
         name: o.name,
         email: o.email,
-        isActive: o.isActive,
+        isActive: o.user_metadata.isActive,
         role: o.role
       }
     } )
