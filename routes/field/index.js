@@ -2,6 +2,9 @@
 const { Router } = require('express')
 const router = Router()
 const {
+  searhcFieldByNamePanel,
+  enableField,
+  getAllFieldsPanel,
   deleteField,
   registerField,
   getFieldById,
@@ -26,6 +29,27 @@ router.get('/', async function (request, reply) {
     return reply.log.error(e)
   }
 })
+
+// Routes for admin panel --> disable fields
+router.get('/panel', async function (request, reply) {
+  try {
+    const fields = await getAllFieldsPanel()
+    return reply.send(fields)
+  } catch (e) {
+    return reply.log.error(e)
+  }
+})
+
+router.get('/panel/search', async function (request, reply) {
+  try {
+    const { name } = request.query
+    const search = await searhcFieldByNamePanel(name)
+    return reply.send(search)
+  } catch (e) {
+    return e
+  }
+})
+// ------//
 
 router.get('/typeField', async function (request, reply) {
   try {
@@ -171,5 +195,19 @@ router.get('/reviews', async function (request, reply) {
     return e
   }
 })
+
+// Route to enable fields
+router.put('/enable/:fieldId', async function (request, reply) {
+  const { fieldId } = request.params
+  try {
+    const enabledField = await enableField(fieldId)
+    return reply.send(enabledField)
+  } catch (e) {
+    return e
+  }
+})
+
+
+
 
 module.exports = router

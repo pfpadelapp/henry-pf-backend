@@ -209,6 +209,37 @@ async function getAverage(fieldId) {
   }
 }
 
+async function enableField(fieldId) {
+  try {
+    const enabledField = await PadelField.findByIdAndUpdate(fieldId, {
+      isActive: true
+    })
+    return enabledField
+  } catch (e) {
+    return e
+  }
+}
+
+async function getAllFieldsPanel() {
+  try {
+    const fields = await PadelField.find()
+    return fields
+  } catch (e) {
+    return e
+  }
+}
+
+async function searhcFieldByNamePanel(name) {
+  try {
+    const result = await PadelField.find({
+      name: { $regex: name, $options: 'i' }
+    })
+    return result
+  } catch (e) {
+    return e
+  }
+}
+
 // async function getAverage(idField) {
 //   try{
 //     let arr = []
@@ -248,5 +279,8 @@ module.exports = {
   updateField,
   registerReviews,
   getReviews,
-  getAverage
+  getAverage,
+  enableField,
+  getAllFieldsPanel,
+  searhcFieldByNamePanel
 }
