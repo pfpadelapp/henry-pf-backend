@@ -12,8 +12,10 @@ const reviewsSchema = new Schema(
       type: String
     },
     idUser: [],
-
-    isActive: Boolean
+    isActive: {
+      type: Boolean,
+      default: true
+    }
   },
   {
     timestamps: true,

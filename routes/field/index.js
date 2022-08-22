@@ -16,7 +16,7 @@ const {
   getPriceByRange,
   updateField,
   registerReviews,
-  getReviews,
+  // getReviews,
   getAverage
 } = require('../../controllers/field')
 
@@ -187,14 +187,14 @@ router.post('/:id/reviews', async function (request, reply) {
   }
 })
 
-router.get('/reviews', async function (request, reply) {
-  try {
-    const reviews = await getReviews()
-    return reply.send(reviews)
-  } catch (e) {
-    return e
-  }
-})
+// router.get('/reviews', async function (request, reply) {
+//   try {
+//     const reviews = await getReviews()
+//     return reply.send(reviews)
+//   } catch (e) {
+//     return e
+//   }
+// })
 
 // Route to enable fields
 router.put('/enable/:fieldId', async function (request, reply) {
