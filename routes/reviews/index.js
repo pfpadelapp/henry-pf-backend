@@ -18,10 +18,10 @@ router.get('/', async function (request, reply) {
   }
 })
 
-router.delete('/:reviewId', async function (request, reply) {
-  const { reviewId } = request.params
+router.delete('/:reviewId/:fieldId/:userId', async function (request, reply) {
+  const { reviewId, fieldId, userId } = request.params
   try {
-    const deletedReview = await deleteReviewById(reviewId)
+    const deletedReview = await deleteReviewById(reviewId, fieldId, userId)
     return reply.send(deletedReview)
   } catch (e) {
     return e
