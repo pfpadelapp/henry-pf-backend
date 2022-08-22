@@ -155,7 +155,8 @@ async function registerReviews(fieldId, idUser,name, rating, review) {
       idUser,
       name,
       rating,
-      review
+      review,
+      isActive: true
     })
     await PadelField.findByIdAndUpdate(fieldId, {
       $push: {
@@ -182,6 +183,7 @@ async function registerReviews(fieldId, idUser,name, rating, review) {
     return e
   }
 }
+
 
 // async function getReviews() {
 //   try {
