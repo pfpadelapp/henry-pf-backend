@@ -161,7 +161,8 @@ async function registerReviews(fieldId, idUser, rating, review) {
         review: {
           rating,
           idUser,
-          review
+          review,
+          reviewId: newReviews.id
         }
       }
     })
@@ -170,7 +171,7 @@ async function registerReviews(fieldId, idUser, rating, review) {
       $push: {
         review: {
           fieldId,
-          _id: newReviews._id
+          reviewId: newReviews.id
         }
       }
     })
