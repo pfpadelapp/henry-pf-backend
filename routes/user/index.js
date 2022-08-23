@@ -115,7 +115,6 @@ router.put('/:userId', async function (request, reply) {
   const { user_metadata.telephone, name } = request.body
   try {
     const updateResult = await updateUser(userId, user_metadata.telephone, name)
-
     return reply.send(updateResult)
   } catch (e) {
     return e
