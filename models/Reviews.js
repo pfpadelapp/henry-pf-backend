@@ -14,7 +14,7 @@ const reviewsSchema = new Schema(
     userMail: [],
     isActive: {
       type: Boolean,
-      default: true
+    //   default: true
     }
   },
   {

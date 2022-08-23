@@ -1,5 +1,5 @@
-// const User = require('../models/user');
-// const PadelField = require('../models/PadelField');
+const User = require('../models/User');
+const PadelField = require('../models/PadelField');
 const Reviews = require('../models/Reviews')
 
 // A modo de prueba!!
@@ -13,12 +13,28 @@ async function getReviews() {
   }
 }
 
-async function deleteReviewById(reviewId) {
+async function deleteReviewById(reviewId, fieldId, userId) {
   try {
     const review = await Reviews.findByIdAndUpdate(reviewId, {
       isActive: false
     })
-    return review
+
+    await PadelField.findByIdAndUpdate(fieldId, {
+      $pull: {
+        review: {
+          reviewId: review.id
+        }
+      }
+    })
+
+    await User.findByIdAndUpdate(userId, {
+      $pull: {
+        review : {
+          reviewId: review.id
+        }
+      }
+    })
+    return review.save()
   } catch (e) {
     return e
   }
