@@ -83,11 +83,25 @@ async function ableUser(userId) {
   }
 }
 
+async function ableAdmin(userId) {
+  try {
+    const ableAdmin = await User.findByIdAndUpdate(
+      userId,
+      { 'user_metadata.isAdmin': true },
+      { new: true }
+    )
+    return ableAdmin
+  } catch (e) {
+    return e
+  }
+}
+
 module.exports = {
   getUserById,
   getAllUsers,
   createUser,
   deleteUserById,
   updateUser,
-  ableUser
+  ableUser,
+  ableAdmin
 }
