@@ -38,6 +38,9 @@ const userSchema = new Schema(
       },
       isActive: {
         type: Boolean
+      },
+      isAdmin: {
+        type: Boolean
       }
     },
     // isActive: Boolean
