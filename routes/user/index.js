@@ -54,7 +54,7 @@ router.post('/', async function (request, reply) {
       password,
       user_metadata
     )
-    
+
     return reply.send({ newUser })
   } catch (e) {
     return e
@@ -112,9 +112,9 @@ router.put('/able/:userId', async function (request, reply) {
 
 router.put('/:userId', async function (request, reply) {
   const { userId } = request.params
-  const { password, user_metadata } = request.body
+  const { user_metadata } = request.body
   try {
-    const updateResult = await updateUser(userId, password, user_metadata)
+    const updateResult = await updateUser(userId, user_metadata)
 
     return reply.send(updateResult)
   } catch (e) {
