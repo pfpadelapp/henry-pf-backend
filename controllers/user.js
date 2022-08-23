@@ -53,12 +53,19 @@ async function deleteUserById(userId) {
   }
 }
 
-async function updateUser(userId, user_metadata.telephone, name) {
+
+
+
+async function updateUser(userId) {
   try {
 
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      { user_metadata.telephone, name },
+      // { 'user_metadata_telephone': telephone }, 
+      { 
+       'user_metadata.telephone': "999999999"
+      },
+      // {name},
       { new: true }
     )
     return updatedUser
