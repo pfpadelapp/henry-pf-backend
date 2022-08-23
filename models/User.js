@@ -51,7 +51,7 @@ const userSchema = new Schema(
         type: String
       },
       isActive: {
-        type: Boolean,
+        type: Boolean
       }
     },
     isActive: Boolean

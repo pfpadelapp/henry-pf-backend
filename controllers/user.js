@@ -25,8 +25,15 @@ async function getUserById(userId) {
 //   return email.split('@')[0]
 // }
 
-async function createUser( name, lastName, contact, email, password, user_metadata) {
-  console.log( name, lastName, contact, email, password, user_metadata)
+async function createUser(
+  name,
+  lastName,
+  contact,
+  email,
+  password,
+  user_metadata
+) {
+  console.log(name, lastName, contact, email, password, user_metadata)
   try {
     const newUser = await User.create({
       name,
@@ -45,9 +52,13 @@ async function createUser( name, lastName, contact, email, password, user_metada
 
 async function deleteUserById(userId) {
   try {
-    const deletedUser = await User.findByIdAndUpdate(userId, {
-      'user_metadata.isActive': false}, 
-      { new: true })
+    const deletedUser = await User.findByIdAndUpdate(
+      userId,
+      {
+        'user_metadata.isActive': false
+      },
+      { new: true }
+    )
 
     return deletedUser
   } catch (e) {
@@ -76,8 +87,8 @@ async function ableUser(userId) {
   try {
     const ableUser = await User.findByIdAndUpdate(
       userId,
-        { 'user_metadata.isActive': true },
-        { new: true }
+      { 'user_metadata.isActive': true },
+      { new: true }
     )
     return ableUser
   } catch (e) {

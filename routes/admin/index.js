@@ -2,18 +2,18 @@
 const { Router } = require('express')
 const router = Router()
 const {
-    getAllAdmins,
-    // getAdminById,
-    createAdmin,
-    deleteAdminById,
-    updatedAdmin,
-    searchUsers,
-    searchOwner,
-    ableAdmin
+  getAllAdmins,
+  // getAdminById,
+  createAdmin,
+  deleteAdminById,
+  updatedAdmin,
+  searchUsers,
+  searchOwner,
+  ableAdmin
 } = require('../../controllers/admin')
 
 const {
-  getAllOwners,
+  getAllOwners
   // getOwnerById,
   // createOwner,
   // deleteOwnerById,
@@ -21,7 +21,7 @@ const {
 } = require('../../controllers/owner')
 
 const {
-  getAllUsers,
+  getAllUsers
   // getUserById,
   // createUser,
   // deleteUserById,
@@ -31,82 +31,74 @@ const { sendMail } = require('../../utils/email')
 
 router.post('/', async (request, reply) => {
   try {
-      const { name, email, username, password } = request.body
-      try {
-        const newAdmin = await createAdmin(name, email, username, password)
-        console.log(newAdmin)
-        if(typeof newAdmin !== 'string') {
-          const subject = 'Ahora eres admin de Padel Field App'
-          const body = `Bienvenido ${name}, ahora eres admin )`
-          sendMail(email, body, subject)
-          return reply.send( newAdmin )
-        }
-        return reply.send({msg: newAdmin})
-        
-      } catch (e) {
-        return e
+    const { name, email, username, password } = request.body
+    try {
+      const newAdmin = await createAdmin(name, email, username, password)
+      console.log(newAdmin)
+      if (typeof newAdmin !== 'string') {
+        const subject = 'Ahora eres admin de Padel Field App'
+        const body = `Bienvenido ${name}, ahora eres admin )`
+        sendMail(email, body, subject)
+        return reply.send(newAdmin)
       }
+      return reply.send({ msg: newAdmin })
+    } catch (e) {
+      return e
+    }
   } catch (e) {
     return e
   }
 })
 
+router.get('/', async function (request, reply) {
+  try {
+    const admins = await getAllAdmins()
+    return reply.send(admins)
+  } catch (e) {
+    return e
+  }
+})
 
-  router.get('/', async function (request, reply) { 
-    try {
-      const admins = await getAllAdmins()
-      return reply.send(admins)
-    } catch (e) {
-      return e
-    }
-  })
+router.delete('/:adminId', async function (request, reply) {
+  const { adminId } = request.params
+  try {
+    const deletedadmin = await deleteAdminById(adminId)
+    return reply.send(deletedadmin)
+  } catch (e) {
+    return e
+  }
+})
 
-
-  router.delete('/:adminId', async function (request, reply) {
-    const { adminId } = request.params
-    try {
-      const deletedadmin = await deleteAdminById(adminId)
-      return reply.send(deletedadmin)
-    } catch (e) {
-      return e
-    }
-  })
-  
-  router.put('/:adminId', async function (request, reply) {
-    const { adminId } = request.params
-    const { password, username } = request.body
-    try {
-      const updateResult = await updatedAdmin(
-        adminId,
-        password,
-        username,
-      )
-      return reply.send(updateResult)
-    } catch (e) {
-      return e
-    }
-  })
+router.put('/:adminId', async function (request, reply) {
+  const { adminId } = request.params
+  const { password, username } = request.body
+  try {
+    const updateResult = await updatedAdmin(adminId, password, username)
+    return reply.send(updateResult)
+  } catch (e) {
+    return e
+  }
+})
 
 router.get('/searchU', async (req, res) => {
   const { name } = req.query
-  try{
+  try {
     const user = await searchUsers(name)
     return res.send(user)
-  }catch(e){
+  } catch (e) {
     return e
   }
 })
 
 router.get('/searchO', async (req, res) => {
   const { name } = req.query
-  try{
+  try {
     const owner = await searchOwner(name)
     return res.send(owner)
-  }catch(e){
+  } catch (e) {
     return e
   }
 })
-
 
 router.put('/able/:adminId', async function (request, reply) {
   const { adminId } = request.params
@@ -118,11 +110,10 @@ router.put('/able/:adminId', async function (request, reply) {
   }
 })
 
-
-
 // ----------- ADMIN FUNCTIONS --------/
 
-router.get('/owner', async function (request, reply) { // ---> /admin/owner
+router.get('/owner', async function (request, reply) {
+  // ---> /admin/owner
   try {
     const owners = await getAllOwners()
     return reply.send(owners)
@@ -130,7 +121,6 @@ router.get('/owner', async function (request, reply) { // ---> /admin/owner
     return reply.lo.error(e)
   }
 })
-
 
 router.get('/user', async function (request, reply) {
   try {
@@ -141,4 +131,4 @@ router.get('/user', async function (request, reply) {
   }
 })
 
-  module.exports = router
+module.exports = router

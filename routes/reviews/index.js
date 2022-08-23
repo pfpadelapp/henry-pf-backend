@@ -2,10 +2,7 @@
 const { Router } = require('express')
 const router = Router()
 
-const {
-  getReviews,
-  deleteReviewById
-} = require('../../controllers/reviews')
+const { getReviews, deleteReviewById } = require('../../controllers/reviews')
 
 // A modo de prueba!!
 

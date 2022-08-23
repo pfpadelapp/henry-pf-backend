@@ -45,10 +45,10 @@ router.get('/:userId', async function (request, reply) {
 })
 
 router.post('/', async function (request, reply) {
-  const { name, lastName, contact, email, password, user_metadata } = request.body
+  const { name, lastName, contact, email, password, user_metadata } =
+    request.body
   try {
     const newUser = await createUser(
-      
       name,
       lastName,
       contact,
@@ -120,7 +120,13 @@ router.put('/:userId', async function (request, reply) {
   const { userId } = request.params
   const { password, contact, nickname, user_metadata } = request.body
   try {
-    const updateResult = await updateUser(userId, password, nickname, contact, user_metadata)
+    const updateResult = await updateUser(
+      userId,
+      password,
+      nickname,
+      contact,
+      user_metadata
+    )
     return reply.send(updateResult)
   } catch (e) {
     return e

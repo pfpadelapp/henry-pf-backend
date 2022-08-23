@@ -29,5 +29,4 @@ async function sendMail(emailDestiny, body, subject) {
   console.log('Message sent: %s', info.messageId)
 }
 
-
 module.exports = { sendMail }

@@ -111,8 +111,6 @@ router.get('/:filedId', async function (request, reply) {
   }
 })
 
-
-
 router.post('/', async function (request, reply) {
   const { name, location, image, type, price, ownerId, availability } =
     request.body
@@ -131,8 +129,6 @@ router.post('/', async function (request, reply) {
     return e
   }
 })
-
-
 
 router.delete('/:fieldId', async function (request, reply) {
   const { fieldId } = request.params
@@ -179,7 +175,13 @@ router.post('/:id/reviews', async function (request, reply) {
   try {
     const { userMail, name, rating, review } = request.body
 
-    const newReviews = await registerReviews(fieldId, userMail, name, rating, review)
+    const newReviews = await registerReviews(
+      fieldId,
+      userMail,
+      name,
+      rating,
+      review
+    )
     await getAverage(fieldId)
     return reply.send(newReviews)
   } catch (e) {
@@ -206,8 +208,5 @@ router.put('/enable/:fieldId', async function (request, reply) {
     return e
   }
 })
-
-
-
 
 module.exports = router

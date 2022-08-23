@@ -1,5 +1,5 @@
-const User = require('../models/User');
-const PadelField = require('../models/PadelField');
+const User = require('../models/User')
+const PadelField = require('../models/PadelField')
 const Reviews = require('../models/Reviews')
 
 // A modo de prueba!!
@@ -29,7 +29,7 @@ async function deleteReviewById(reviewId, fieldId, userId) {
 
     await User.findByIdAndUpdate(userId, {
       $pull: {
-        review : {
+        review: {
           reviewId: review.id
         }
       }
