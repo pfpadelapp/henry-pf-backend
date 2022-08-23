@@ -29,7 +29,8 @@ async function createUser(name, lastName, email, password, user_metadata) {
       lastName,
       email,
       password,
-      user_metadata
+      user_metadata,
+      picture: 'https://thumbs.dreamstime.com/b/creative-design-padel-player-symbol-padel-player-symbol-131629171.jpg'
     })
     return newUser
   } catch (e) {
@@ -56,16 +57,16 @@ async function deleteUserById(userId) {
 
 
 
-async function updateUser(userId) {
+async function updateUser(userId, newname, telephone, pic) {
   try {
 
     const updatedUser = await User.findByIdAndUpdate(
       userId,
-      // { 'user_metadata_telephone': telephone }, 
-      { 
-       'user_metadata.telephone': "999999999"
+      {
+        name: newname,
+       'user_metadata.telePhone': telephone,
+        picture: pic
       },
-      // {name},
       { new: true }
     )
     return updatedUser

@@ -112,11 +112,10 @@ router.put('/able/:userId', async function (request, reply) {
 
 router.put('/:userId', async function (request, reply) {
   const { userId } = request.params
-  // const { telephone} = request.body
-  // const { n } = request.body
+  const { name, telephone, pic} = request.body
   try {
-    const updateResult = await updateUser(userId)
-    return reply.send(updateResult) 
+    const updateResult = await updateUser(userId, name, telephone, pic)
+    return reply.send(updateResult)
   } catch (e) {
     return e
   }

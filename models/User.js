@@ -23,6 +23,10 @@ const userSchema = new Schema(
       require: true,
       trim: true
     },
+    picture: {
+      type: String,
+      trim: true
+    },
     history: [],
     review: [],
     padelFields: [],
