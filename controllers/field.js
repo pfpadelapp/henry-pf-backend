@@ -162,7 +162,8 @@ async function registerReviews(fieldId, userMail, name, rating, review) {
           userMail,
           name,
           review,
-          reviewId: newReviews.id
+          reviewId: newReviews.id,
+          isActive: newReviews.isActive
         }
       }
     })

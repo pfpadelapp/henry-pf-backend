@@ -24,16 +24,30 @@ async function getAdminById(adminId) {
 async function searchUsers(name) {
   try {
     const users = await User.find({ name: { $regex: name, $options: 'i' } })
-    const userFilter = users.map((u) => {
-      return {
-        _id: u._id,
-        name: u.name,
-        email: u.email,
-        isActive: u.user_metadata.isActive,
-        role: u.user_metadata.rol
-      }
-    })
-    return userFilter
+    const usersE = await User.find({ email: { $regex: name, $options: 'i' } })
+    if(users.length > 0) {
+      const userFilter = users.map((u) => {
+        return {
+          _id: u._id,
+          name: u.name,
+          email: u.email,
+          isActive: u.user_metadata.isActive,
+          role: u.user_metadata.rol
+        }
+      })
+      return userFilter
+    }else if( usersE.length > 0) {
+      const userFilter = usersE.map((u) => {
+        return {
+          _id: u._id,
+          name: u.name,
+          email: u.email,
+          isActive: u.user_metadata.isActive,
+          role: u.user_metadata.rol
+        }
+      })
+      return userFilter
+    }
   } catch (e) {
     return e
   }
@@ -42,16 +56,31 @@ async function searchUsers(name) {
 async function searchOwner(name) {
   try {
     const owner = await Owner.find({ name: { $regex: name, $options: 'i' } })
-    const ownerFilter = owner.map((o) => {
-      return {
-        _id: o._id,
-        name: o.name,
-        email: o.email,
-        isActive: o.user_metadata.isActive,
-        role: o.user_metadata.rol
-      }
-    })
-    return ownerFilter
+    const ownerE = await Owner.find({ email: { $regex: name, $options: 'i' } })
+    if(owner.length > 0) {
+      const ownerFilter = owner.map((o) => {
+        return {
+          _id: o._id,
+          name: o.name,
+          email: o.email,
+          isActive: o.user_metadata.isActive,
+          role: o.user_metadata.rol
+        }
+      })
+      return ownerFilter
+    } else if (ownerE.length > 0){
+      const ownerFilter = ownerE.map((o) => {
+        return {
+          _id: o._id,
+          name: o.name,
+          email: o.email,
+          isActive: o.user_metadata.isActive,
+          role: o.user_metadata.rol
+        }
+      })
+      return ownerFilter
+    }
+   
   } catch (e) {
     return e
   }
