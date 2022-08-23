@@ -7,6 +7,10 @@ const userSchema = new Schema(
       type: String,
       trim: true
     },
+    lastName: {
+      type: String,
+      trim: true
+    },
     email: {
       type: String,
       trim: true,
@@ -18,24 +22,6 @@ const userSchema = new Schema(
       type: String,
       require: true,
       trim: true
-    },
-    contact: {
-      type: Number
-    },
-    nickname: {
-      type: String,
-      trim: true
-    },
-    lastName: {
-      type: String,
-      trim: true
-    },
-    role: {
-      type: String,
-      default: 'user'
-    },
-    score: {
-      type: Number
     },
     history: [],
     review: [],
@@ -54,7 +40,7 @@ const userSchema = new Schema(
         type: Boolean,
       }
     },
-    isActive: Boolean
+    // isActive: Boolean
   },
   {
     timestamps: true,

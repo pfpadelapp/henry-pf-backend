@@ -9,6 +9,7 @@ const booking = require('./booking/index')
 const reviews = require('./reviews/index')
 const payment = require('./payment/index')
 const admin = require('./admin/index')
+const roles = require('./roles/index')
 
 const router = Router()
 
@@ -20,5 +21,6 @@ router.use('/booking', booking)
 router.use('/reviews', reviews)
 router.use('/payment', payment)
 router.use('/admin', admin)
+router.use('/roles', roles)
 
 module.exports = router

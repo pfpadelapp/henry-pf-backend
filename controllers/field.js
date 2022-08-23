@@ -1,5 +1,5 @@
 const PadelField = require('../models/PadelField')
-const Owner = require('../models/Owner')
+// const Owner = require('../models/Owner')
 const Reviews = require('../models/Reviews')
 const User = require('../models/User')
 
@@ -29,7 +29,7 @@ function taxes(price){
   } 
 
 
-async function registerField(name, location, image, type, price, ownerId) {
+async function registerField(name, location, image, type, price, userId) {
   try {
     const newField = await PadelField.create({
       name,
@@ -37,11 +37,12 @@ async function registerField(name, location, image, type, price, ownerId) {
       image,
       type,
       price: taxes(price) ,
-      owner: ownerId,
+      user: userId,
       isActive: true,
       availability: true
     })
-    await Owner.findByIdAndUpdate(ownerId, {
+
+    await User.findByIdAndUpdate(userId, {
       $push: {
         padelFields: {
           _id: newField._id

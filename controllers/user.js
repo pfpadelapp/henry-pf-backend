@@ -20,20 +20,14 @@ async function getUserById(userId) {
   }
 }
 
-// function nick(email){
-//   // return email.substring(0, email.indexOf('@'))
-//   return email.split('@')[0]
-// }
 
-async function createUser( name, lastName, contact, email, password, user_metadata) {
-  console.log( name, lastName, contact, email, password, user_metadata)
+async function createUser( name, lastName, email, password, user_metadata) {
+  console.log( name, lastName, email, password, user_metadata)
   try {
     const newUser = await User.create({
       name,
       lastName,
-      contact,
       email,
-      nickname: email.split('@')[0],
       password,
       user_metadata
     })
@@ -55,14 +49,14 @@ async function deleteUserById(userId) {
   }
 }
 
-async function updateUser(userId, password, nickname, contact, user_metadata) {
+async function updateUser(userId, password, user_metadata) {
   try {
     if (password !== undefined) {
       const salt = await bcrypt.genSalt(10)
       const hash = await bcrypt.hash(password, salt)
       const updatedUser = await User.findByIdAndUpdate(
         userId,
-        { password: hash, contact, nickname, user_metadata },
+        { password: hash, user_metadata },
         { new: true }
       )
       return updatedUser
