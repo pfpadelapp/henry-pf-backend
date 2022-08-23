@@ -26,8 +26,8 @@ router.post('/createPayment', (req, res) => {
         brand_name: 'Padel Field',
         landing_page: 'NO_PREFERENCE',
         user_action: 'PAY_NOW',
-        return_url: `https://henry-pf-frontend-six.vercel.app/resultadoPago`,
-        cancel_url: `https://henry-pf-frontend-six.vercel.app/detail/${idField}`
+        return_url: `https://padelapp.netlify.app/resultadoPago`,
+        cancel_url: `https://padelapp.netlify.app/detail/${idField}`
       }
     }
 
