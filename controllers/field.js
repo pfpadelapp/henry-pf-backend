@@ -149,10 +149,10 @@ async function updateField(
   }
 }
 
-async function registerReviews(fieldId, idUser,name, rating, review) {
+async function registerReviews(fieldId, userMail,name, rating, review) {
   try {
     const newReviews = await Reviews.create({
-      idUser,
+      userMail,
       name,
       rating,
       review
@@ -161,7 +161,7 @@ async function registerReviews(fieldId, idUser,name, rating, review) {
       $push: {
         review: {
           rating,
-          idUser,
+          userMail,
           name,
           review,
           reviewId: newReviews.id
@@ -169,14 +169,14 @@ async function registerReviews(fieldId, idUser,name, rating, review) {
       }
     })
 
-    await User.findByIdAndUpdate(idUser, {
+   /*  await User.findByIdAndUpdate(idUser, {
       $push: {
         review: {
           fieldId,
           reviewId: newReviews.id
         }
       }
-    })
+    }) */
     return newReviews.save()
   } catch (e) {
     return e
