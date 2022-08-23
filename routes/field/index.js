@@ -112,7 +112,7 @@ router.get('/:filedId', async function (request, reply) {
 })
 
 router.post('/', async function (request, reply) {
-  const { name, location, image, type, price, ownerId, availability } =
+  const { name, location, image, type, price, user, availability } =
     request.body
   try {
     const newFiled = await registerField(
@@ -121,7 +121,7 @@ router.post('/', async function (request, reply) {
       image,
       type,
       price,
-      ownerId,
+      user,
       availability
     )
     return reply.send(newFiled)

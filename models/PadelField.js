@@ -12,7 +12,7 @@ const padelFieldsSchema = new Schema(
       require: true,
       trim: true
     },
-    owner: {
+    user: {
       type: String,
       trim: true,
       require: true
