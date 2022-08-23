@@ -69,7 +69,6 @@ router.delete('/:ownerId', async function (request, reply) {
   }
 })
 
-
 router.put('/able/:ownerId', async function (request, reply) {
   const { ownerId } = request.params
   try {
@@ -79,7 +78,6 @@ router.put('/able/:ownerId', async function (request, reply) {
     return e
   }
 })
-
 
 router.put('/:ownerId', async function (request, reply) {
   const { ownerId } = request.params

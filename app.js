@@ -1,11 +1,9 @@
-
 const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
 const routes = require('./routes/root')
 const cors = require('cors')
 // const path = require('path')
-
 
 require('./mongo.js')
 

@@ -48,7 +48,6 @@ router.post('/', async function (request, reply) {
   const { name, lastName, email, password, user_metadata } = request.body
   try {
     const newUser = await createUser(
-      
       name,
       lastName,
       email,
@@ -116,6 +115,7 @@ router.put('/:userId', async function (request, reply) {
   const { password, user_metadata } = request.body
   try {
     const updateResult = await updateUser(userId, password, user_metadata)
+
     return reply.send(updateResult)
   } catch (e) {
     return e

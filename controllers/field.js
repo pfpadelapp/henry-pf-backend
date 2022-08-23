@@ -21,13 +21,11 @@ async function getFieldById(ownerId) {
   }
 }
 
-function taxes(price){
+function taxes(price) {
   const priceI = parseInt(price)
-  const result =  priceI + (priceI * 0.1) + (priceI * 0.05)
+  const result = priceI + priceI * 0.1 + priceI * 0.05
   return result
-  
-  } 
-
+}
 
 async function registerField(name, location, image, type, price, userId) {
   try {
@@ -54,7 +52,6 @@ async function registerField(name, location, image, type, price, userId) {
     return e
   }
 }
-
 
 async function deleteField(fieldId) {
   try {
@@ -150,10 +147,10 @@ async function updateField(
   }
 }
 
-async function registerReviews(fieldId, idUser,name, rating, review) {
+async function registerReviews(fieldId, userMail, name, rating, review) {
   try {
     const newReviews = await Reviews.create({
-      idUser,
+      userMail,
       name,
       rating,
       review,
@@ -163,28 +160,28 @@ async function registerReviews(fieldId, idUser,name, rating, review) {
       $push: {
         review: {
           rating,
-          idUser,
+          userMail,
           name,
           review,
-          reviewId: newReviews.id
+          reviewId: newReviews.id,
+          isActive: newReviews.isActive
         }
       }
     })
 
-    await User.findByIdAndUpdate(idUser, {
+    /*  await User.findByIdAndUpdate(idUser, {
       $push: {
         review: {
           fieldId,
           reviewId: newReviews.id
         }
       }
-    })
+    }) */
     return newReviews.save()
   } catch (e) {
     return e
   }
 }
-
 
 // async function getReviews() {
 //   try {

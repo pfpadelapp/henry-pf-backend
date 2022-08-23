@@ -2,7 +2,7 @@ const Booking = require('../models/Booking')
 const { sendMail } = require('../utils/email')
 const { getUserById } = require('./user')
 const { getFieldById } = require('./field')
-const  User = require('../models/User')
+const User = require('../models/User')
 
 const horarios = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 

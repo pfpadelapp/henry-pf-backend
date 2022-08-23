@@ -11,11 +11,10 @@ const reviewsSchema = new Schema(
     review: {
       type: String
     },
-    idUser: [],
-
+    userMail: [],
     isActive: {
-      type: Boolean,
-    //   default: true
+      type: Boolean
+      //   default: true
     }
   },
   {
