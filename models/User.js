@@ -41,6 +41,9 @@ const userSchema = new Schema(
       },
       isAdmin: {
         type: Boolean
+      },
+      isSuperAdmin: {
+        type: Boolean
       }
     },
     // isActive: Boolean
