@@ -22,8 +22,8 @@ async function getFieldById(ownerId) {
 }
 
 function taxes(price){
-
-  const result =  price + (price * 0.1) + (price * 0.05)
+  const priceI = parseInt(price)
+  const result =  priceI + (priceI * 0.1) + (priceI * 0.05)
   return result
   
   } 
