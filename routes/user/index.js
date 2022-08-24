@@ -7,7 +7,8 @@ const {
   createUser,
   deleteUserById,
   updateUser,
-  ableUser
+  ableUser,
+  ableAdmin
 } = require('../../controllers/user')
 // const { sendMail } = require('../../utils/email')
 
@@ -115,6 +116,16 @@ router.put('/:userId', async function (request, reply) {
   const { name, telephone, pic} = request.body
   try {
     const updateResult = await updateUser(userId, name, telephone, pic)
+    return reply.send(updateResult)
+  } catch (e) {
+    return e
+  }
+})
+
+router.put('/:userId/admin', async function (request, reply) {
+  const { userId } = request.params
+  try {
+    const updateResult = await ableAdmin(userId)
     return reply.send(updateResult)
   } catch (e) {
     return e
