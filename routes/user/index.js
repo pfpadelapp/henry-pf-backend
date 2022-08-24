@@ -10,7 +10,8 @@ const {
   ableUser,
   ableAdmin
 } = require('../../controllers/user')
-// const { sendMail } = require('../../utils/email')
+const { sendMail } = require('../../utils/email');
+const {emailUserRegister} = require('../../utils/emailTemplate');
 
 require('dotenv')
 // const user = require('../../models/User')
@@ -55,6 +56,12 @@ router.post('/', async function (request, reply) {
       password,
       user_metadata
     )
+
+    const date = new Date();
+    const newDate = `${date.toString().slice(8,10)} ${date.toString().slice(4,7)} ${date.getFullYear()}`;
+    const emailBody = emailUserRegister(name, newDate);
+    const subject = 'Bienvenido a Padel Field';
+    sendMail(email, emailBody, subject);
 
     return reply.send({ newUser })
   } catch (e) {

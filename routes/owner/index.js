@@ -9,7 +9,8 @@ const {
   updatedOwner,
   ableOwner
 } = require('../../controllers/owner')
-// const { sendMail } = require('../../utils/email')
+const { sendMail } = require('../../utils/email');
+const {emailOwnerRegister} = require('../../utils/emailTemplate');
 
 require('dotenv')
 const owner = require('../../models/Owner')
@@ -34,16 +35,18 @@ router.get('/:ownerId', async function (request, reply) {
 })
 
 router.post('/', async function (request, reply) {
-  const { name, contact, email, username, password } = request.body
+  const { name, contact, email, username, password } = request.body;
   try {
-    const newOwner = await createOwner(name, contact, email, username, password)
+    const newOwner = await createOwner(name, contact, email, username, password);
 
-    // const subject = 'Bienvenido a Padel Field'
-    // const body = `Hola ${name}, gracias por registrarte en Padel Field (PROPIETARIO)`
-    // sendMail(email, body, subject)
-    return reply.send({ newOwner })
+    const date = new Date();
+    const newDate = `${date.toString().slice(8,10)} ${date.toString().slice(4,7)} ${date.getFullYear()}`;
+    const emailBody = emailOwnerRegister(name, newDate);
+    const subject = 'Bienvenido a Padel Field';
+    sendMail(email, emailBody, subject);
+    return reply.send({ newOwner });
   } catch (e) {
-    return e
+    return e;
   }
 })
 
