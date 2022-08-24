@@ -3,9 +3,12 @@ const { sendMail } = require('../utils/email')
 const { getUserById } = require('./user')
 const { getFieldById } = require('./field')
 const User = require('../models/User')
+const Field = require('../models/PadelField')
 const {emailBooking} = require('../utils/emailTemplate.js');
 
 const horarios = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
+
+const { name, image, price } = Field
 
 async function getBookingsFields(idField) {
   try {
@@ -41,6 +44,9 @@ async function setNewBooking(idUser, idField, date) {
     await User.findByIdAndUpdate(idUser, {
       $push: {
         history: {
+          name,
+          image,
+          price,
           newBooking
         }
       }
