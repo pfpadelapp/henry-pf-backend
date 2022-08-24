@@ -93,7 +93,10 @@ async function ableAdmin(userId) {
   try {
     const ableAdmin = await User.findByIdAndUpdate(
       userId,
-      { 'user_metadata.isAdmin': true },
+      { 
+        'user_metadata.isAdmin': true,
+        'user_metadata.rol': "Admin"
+    },
       { new: true }
     )
     return ableAdmin
