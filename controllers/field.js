@@ -43,6 +43,8 @@ async function registerField(name, location, image, type, price, userId) {
     await User.findByIdAndUpdate(userId, {
       $push: {
         padelFields: {
+          image,
+          name,
           _id: newField._id
         }
       }
