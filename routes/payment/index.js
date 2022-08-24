@@ -39,8 +39,8 @@ router.post('/createPayment', (req, res) => {
         json: true
       },
       (_err, response) => {
-        if (!_err) res.send(response.body.links[1].href)
-        else res.send(response.body)
+        console.log(response.body);
+        res.send(response.body)
       }
     )
   } catch (e) {
