@@ -27,8 +27,7 @@ const {
   // deleteUserById,
   // updateUser
 } = require('../../controllers/user')
-const { sendMail } = require('../../utils/email');
-const {emailAdminRegister} = require('../../utils/emailTemplate.js');
+const { sendMail } = require('../../utils/email')
 
 router.post('/', async (request, reply) => {
   try {
@@ -37,12 +36,10 @@ router.post('/', async (request, reply) => {
       const newAdmin = await createAdmin(name, email, username, password)
       console.log(newAdmin)
       if (typeof newAdmin !== 'string') {
-        const date = new Date();
-        const newDate = `${date.toString().slice(8,10)} ${date.toString().slice(4,7)} ${date.getFullYear()}`;
-        const emailBody = emailAdminRegister(name, newDate);
-        const subject = 'Bienvenido a Padel Field';
-        sendMail(email, emailBody, subject);
-        return reply.send( newAdmin )
+        const subject = 'Ahora eres admin de Padel Field App'
+        const body = `Bienvenido ${name}, ahora eres admin )`
+        sendMail(email, body, subject)
+        return reply.send(newAdmin)
       }
       return reply.send({ msg: newAdmin })
     } catch (e) {

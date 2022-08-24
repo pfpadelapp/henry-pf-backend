@@ -3,7 +3,6 @@ const { sendMail } = require('../utils/email')
 const { getUserById } = require('./user')
 const { getFieldById } = require('./field')
 const User = require('../models/User')
-const {emailBooking} = require('../utils/emailTemplate.js');
 
 const horarios = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 
@@ -27,16 +26,11 @@ async function setNewBooking(idUser, idField, date) {
       date,
       isActive: true
     })
-    const user = await getUserById(idUser);
-    const field = await getFieldById(idField);
-    const actualDate = new Date();
-    const subject = 'Confirmacion de reservacion';
-    const newDate = `${actualDate.toString().slice(8,10)} ${actualDate.toString().slice(4,7)} ${actualDate.getFullYear()}`;
-    const dateBooking = new Date(date);
-    const day = `${dateBooking.toString().slice(8,10)} ${dateBooking.toString().slice(4,7)} ${dateBooking.getFullYear()}`;
-    const hour = `${dateBooking.toString().slice(16,18)}:00 hrs.`;
-    const emailBody = emailBooking(user.name, newDate, field.name, field.location, field.price, day, hour);
-    sendMail(user.email, emailBody, subject);
+    const user = await getUserById(idUser)
+    const field = await getFieldById(idField)
+    const subject = 'Confirmacion de reservacion'
+    const body = `Hola ${user.name}, has reservado la cancha ${field.name} para el dia ${date}`
+    sendMail(user.email, body, subject)
 
     await User.findByIdAndUpdate(idUser, {
       $push: {
