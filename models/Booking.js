@@ -14,6 +14,15 @@ const bookingSchema = new Schema(
       type: Date,
       require: true
     },
+    name: {
+      type: String
+    },
+    image: {
+      type: String
+    },
+    price: {
+      type: Number
+    },
     isActive: Boolean
   },
   {

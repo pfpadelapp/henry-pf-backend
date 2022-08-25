@@ -30,11 +30,11 @@ router.get('/hours', async (request, reply) => {
   }
 })
 
+
 router.post('/', async (request, reply) => {
   try {
     const { idUser, idField, date } = request.body
     const result = await setNewBooking(idUser, idField, date)
-
     return reply.send(result)
   } catch (e) {
     return e

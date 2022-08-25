@@ -37,7 +37,6 @@ const padelFieldsSchema = new Schema(
     ratingsAverage: {
       type: Number
     },
-    horario: [],
     review: [
       // {
       //   type: Schema.Types.ObjectId,

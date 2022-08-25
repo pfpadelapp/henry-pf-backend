@@ -45,7 +45,8 @@ async function registerField(name, location, image, type, price, userId) {
         padelFields: {
           image,
           name,
-          _id: newField._id
+          _id: newField._id,
+          isActive: true
         }
       }
     })
@@ -59,7 +60,9 @@ async function deleteField(fieldId) {
   try {
     const deletedField = await PadelField.findByIdAndUpdate(fieldId, {
       isActive: false
-    })
+
+    },
+    { new: true })
     return deletedField
   } catch (e) {
     return e
