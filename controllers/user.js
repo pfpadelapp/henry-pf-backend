@@ -108,7 +108,7 @@ async function ableAdmin(userId) {
 async function google(given_name, email, telePhone, family_name) { // obj {}
   try {
     const newUserG = await User.create({
-      given_name,
+      name: given_name,
       lastName: family_name,
       email,
       password: given_name + email,
