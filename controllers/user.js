@@ -105,6 +105,29 @@ async function ableAdmin(userId) {
   }
 }
 
+async function google(given_name, email, telePhone, family_name) { // obj {}
+  try {
+    const newUserG = await User.create({
+      given_name,
+      lastName: family_name,
+      email,
+      password: 'abc',
+      picture: 'https://thumbs.dreamstime.com/b/creative-design-padel-player-symbol-padel-player-symbol-131629171.jpg',
+      'user_metadata.telePhone' : telePhone,
+      email_verified: true
+    })
+    return newUserG
+  } catch (e) {
+    return e
+  }
+}
+
+// ------GOOGLE ----//
+// email: "lair.yamila.belen@gmail.com" email_verified: true family_name: "Lair" given_name: "Yamila Belen" locale: "es-419" name: "Yamila Belen Lair" nickname: "lair.yamila.belen" picture: "https://lh3.googleusercontent.com/a-/AFdZucqtgUGFIarCXKb1pghXDqSXD3rhsOvWqIpUKBT8qg=s96-c" sub: "google-oauth2|100915668923603980549" updated_at: "2022-08-25T03:15:50.446Z"
+
+
+
+
 module.exports = {
   getUserById,
   getAllUsers,
@@ -112,5 +135,6 @@ module.exports = {
   deleteUserById,
   updateUser,
   ableUser,
-  ableAdmin
+  ableAdmin,
+  google
 }
