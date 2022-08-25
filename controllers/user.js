@@ -105,14 +105,14 @@ async function ableAdmin(userId) {
   }
 }
 
-async function google(given_name, email, telePhone, family_name) { // obj {}
+async function google(given_name, email, telePhone, family_name, picture) { // obj {}
   try {
     const newUserG = await User.create({
       name: given_name,
       lastName: family_name,
       email,
       password: given_name + email,
-      picture: 'https://thumbs.dreamstime.com/b/creative-design-padel-player-symbol-padel-player-symbol-131629171.jpg',
+      picture: picture,
       'user_metadata.telePhone' : telePhone,
       'user_metadata.rol' : "player",
       'user_metadata.isActive' : true,
@@ -126,8 +126,7 @@ async function google(given_name, email, telePhone, family_name) { // obj {}
   }
 }
 
-// ------GOOGLE ----//
-// email: "lair.yamila.belen@gmail.com" email_verified: true family_name: "Lair" given_name: "Yamila Belen" locale: "es-419" name: "Yamila Belen Lair" nickname: "lair.yamila.belen" picture: "https://lh3.googleusercontent.com/a-/AFdZucqtgUGFIarCXKb1pghXDqSXD3rhsOvWqIpUKBT8qg=s96-c" sub: "google-oauth2|100915668923603980549" updated_at: "2022-08-25T03:15:50.446Z"
+
 
 
 
