@@ -111,9 +111,13 @@ async function google(given_name, email, telePhone, family_name) { // obj {}
       given_name,
       lastName: family_name,
       email,
-      password: 'abc',
+      password: given_name + email,
       picture: 'https://thumbs.dreamstime.com/b/creative-design-padel-player-symbol-padel-player-symbol-131629171.jpg',
       'user_metadata.telePhone' : telePhone,
+      'user_metadata.rol' : "player",
+      'user_metadata.isActive' : true,
+      'user_metadata.isAdmin' : false,
+      'user_metadata.isSuperAdmin' : false,
       email_verified: true
     })
     return newUserG
