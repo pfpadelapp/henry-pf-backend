@@ -72,14 +72,15 @@ router.post('/', async function (request, reply) {
 
 
 router.post('/google', async function (request, reply) {
-  const {  given_name, email, telePhone, family_name } = request.body
+  const {  given_name, email, telePhone, family_name, picture } = request.body
   try {
     
     const newUserG = await google(
       given_name,
       email,
       telePhone,
-      family_name
+      family_name,
+      picture
     )
     console.log(newUserG)
     return reply.send( newUserG )
