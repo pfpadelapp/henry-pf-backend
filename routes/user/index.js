@@ -8,7 +8,8 @@ const {
   deleteUserById,
   updateUser,
   ableUser,
-  ableAdmin
+  ableAdmin,
+  google
 } = require('../../controllers/user')
 const { sendMail } = require('../../utils/email');
 const {emailUserRegister} = require('../../utils/emailTemplate');
@@ -64,6 +65,24 @@ router.post('/', async function (request, reply) {
     sendMail(email, emailBody, subject);
 
     return reply.send({ newUser })
+  } catch (e) {
+    return e
+  }
+})
+
+
+router.post('/google', async function (request, reply) {
+  const {  given_name, email, telePhone, family_name } = request.body
+  try {
+    
+    const newUserG = await google(
+      given_name,
+      email,
+      telePhone,
+      family_name
+    )
+    console.log(newUserG)
+    return reply.send( newUserG )
   } catch (e) {
     return e
   }
@@ -138,5 +157,11 @@ router.put('/:userId/admin', async function (request, reply) {
     return e
   }
 })
+
+
+
+
+
+
 
 module.exports = router
