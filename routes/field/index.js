@@ -149,7 +149,6 @@ router.put('/:fieldId', async function (request, reply) {
     name,
     location,
     type,
-    horario,
     isActive
   } = request.body
   try {
@@ -161,7 +160,6 @@ router.put('/:fieldId', async function (request, reply) {
       name,
       location,
       type,
-      horario,
       isActive
     )
     return reply.send(updateResult)
