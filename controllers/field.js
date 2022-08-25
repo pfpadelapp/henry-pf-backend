@@ -24,7 +24,7 @@ async function getFieldById(ownerId) {
 function taxes(price) {
   const priceI = parseInt(price)
   const result = priceI + priceI * 0.1 + priceI * 0.05
-  return result
+  return Math.ceil(result)
 }
 
 async function registerField(name, location, image, type, price, userId) {
@@ -34,7 +34,7 @@ async function registerField(name, location, image, type, price, userId) {
       location,
       image,
       type,
-      price: taxes(price) ,
+      price: taxes(price),
       user: userId,
       isActive: true,
       availability: true
