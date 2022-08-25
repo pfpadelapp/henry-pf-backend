@@ -3,18 +3,18 @@ const { sendMail } = require('../utils/email')
 const { getUserById } = require('./user')
 const { getFieldById } = require('./field')
 const User = require('../models/User')
-const Field = require('../models/PadelField')
 const {emailBooking} = require('../utils/emailTemplate.js');
+
 
 const horarios = [9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 
-const { name, image, price } = Field
+
 
 async function getBookingsFields(idField) {
   try {
     const bookings = await Booking.find({
       isActive: true,
-      idField
+      idField,
     })
     return bookings
   } catch (e) {
@@ -24,14 +24,17 @@ async function getBookingsFields(idField) {
 
 async function setNewBooking(idUser, idField, date) {
   try {
+    const field = await getFieldById(idField);
     const newBooking = await Booking.create({
       idUser,
       idField,
       date,
+      name: field.name,
+      image: field.image,
+      price: field.price,
       isActive: true
     })
     const user = await getUserById(idUser);
-    const field = await getFieldById(idField);
     const actualDate = new Date();
     const subject = 'Confirmacion de reservacion';
     const newDate = `${actualDate.toString().slice(8,10)} ${actualDate.toString().slice(4,7)} ${actualDate.getFullYear()}`;
@@ -44,14 +47,10 @@ async function setNewBooking(idUser, idField, date) {
     await User.findByIdAndUpdate(idUser, {
       $push: {
         history: {
-          name,
-          image,
-          price,
           newBooking
         }
       }
     })
-
     return newBooking
   } catch (e) {
     return e
